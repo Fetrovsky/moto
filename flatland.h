@@ -44,14 +44,14 @@ namespace flatland
     {
         private:
             Image& _view;
-            Point _top_left;
+            Point _bottom_left;
             Size _scale;
 
             int32_t translate_x(float x)
-            { return int32_t((x - _top_left.X) / _scale.Width); }
+            { return int32_t((x - _bottom_left.X) / _scale.Width); }
 
             int32_t translate_y(float y)
-            { return int32_t((_top_left.Y - y) / _scale.Height); }
+            { return _view.Size_Y() - int32_t((_bottom_left.Y + y) / _scale.Height); }
 
             void draw_horizontal(float begin, float end, float y, uint32_t Color);
             void draw_basic(Point p0, Point p1, Point p2, uint32_t Color);
@@ -60,7 +60,7 @@ namespace flatland
         public:
             Viewport(Image& view):
                 _view(view),
-                _top_left({0.0, float(view.Size_Y())}),
+                _bottom_left({0.0, 0.0}),
                 _scale({1.0, 1.0})
             {}
 

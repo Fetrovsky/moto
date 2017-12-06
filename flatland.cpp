@@ -20,15 +20,7 @@ void flatland::Viewport::draw_horizontal(float begin, float end, float y, uint32
     auto view_begin = std::max(translate_x(begin), 0);
     auto view_end = std::min(translate_x(end), int32_t(_view.Size_X()) - 1);
 
-    std::cout
-        << '['
-            << begin << ".." << end << ", " << y
-            << "] --> ["
-            << view_begin << ".." << view_end << ", " << view_y
-        << ']'
-        << std::endl;
-
-    auto row = _view[y];
+    auto row = _view[view_y];
     for (auto it = &row[view_begin]; it <= &row[view_end]; ++it)
         *it = Color;
 }
